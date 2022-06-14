@@ -2,8 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
-test.py
 # C extensions
 *.so
 
@@ -53,6 +51,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
+check.py
 
 # Flask stuff:
 instance/
