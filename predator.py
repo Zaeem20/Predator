@@ -6,7 +6,6 @@ import random
 import requests
 import re
 from concurrent.futures import ThreadPoolExecutor
-import sys
 
 red = "\033[1;91m"
 green = "\033[1;92m"
@@ -39,13 +38,6 @@ socks5_proxy = requests.get(
     "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks5.txt").text.split("\n")
 
 
-
-
-
-
-
-
-
 def Main_Menu():  # in This Function Septum The Url To Make It Usable For The FutureSetting Of HttpRequests
     global url
     global url2
@@ -65,32 +57,42 @@ def Main_Menu():  # in This Function Septum The Url To Make It Usable For The Fu
     IP_REGEX = r"[\d]{0,3}\.[\d]{0,3}\.[\d]{0,3}\.[\d]{0,3}"
 
     print("\033[92m")
-    choice = int(input(f"\n{green}Do you want one target [0] or more[1] > {end}"))
-    while True:
-        if choice == 1:
-            ip_file = input(f"{green}Insert txt file of ips > {end}")
-            ips = open(ip_file).readlines()
-            break
-        elif choice == 0:
-            while True:             # Automatically detect whether input is IP or URL
-                url = input(f"\n{green}Please Enter URL/IPv4 Address: {end}").strip()
-                if re.match(URL_REGEX, url):
-                    break
-                elif re.match(IP_REGEX, url):
-                    break
-                else:
-                    print(f"{red}Pattern Error, please enter correct URL/IPv4 Address{end}")
 
-            url2 = re.split(r"://", url)[1]
-
+    try:
+        while True:
             try:
-                urlport = url.split(":")[2] # directly get port if exist
-            except:
-                urlport = "80"
+                choice = int(input(f"\n{green}Do you want one target [0] or more[1] > {end}"))
+            except ValueError:
+                print(f"{red}Use integers Only!!!{end}")
+            if choice == 1:
+                ip_file = input(f"{green}Insert txt file of ips > {end}")
+                ips = open(ip_file).readlines()
+                break
+            elif choice == 0:
+                while True:             # Automatically detect whether input is IP or URL
+                    url = input(f"\n{green}Please Enter URL/IPv4 Address: {end}").strip()
+                    if re.match(URL_REGEX, url):
+                        break
+                    elif re.match(IP_REGEX, url):
+                        break
+                    else:
+                        print(f"{red}Pattern Error, please enter correct URL/IPv4 Address{end}")
 
-            break # Gets out of Loop
-        else:
-            print(f"{red}Invalid Option!!!{end}")
+                url2 = re.split(r"://", url)[1]
+
+                try:
+                    urlport = url.split(":")[2] # directly get port if exist
+                except:
+                    urlport = "80"
+
+                break # Gets out of Loop
+            else:
+                print(f"{red}Invalid Options!!!{end}")
+    except KeyboardInterrupt:
+        print(f"{red}KeyboardInterrupt Detected, Exiting...{end}")
+        exit()
+    except Exception as e:  # If something goes wrong
+        print(f"{red}Error: {e}{end}")
 
     while True:
         anonymous = input("\nDo you want to use SOCKS4/5 or proxy [y/n] > ").lower()
