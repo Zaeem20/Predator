@@ -1,4 +1,4 @@
-# Hibernet
+# PREDATOR
 A powerful HTTP flooding tool.
 You can choose if use proxy/socks to anonymize attack.
 
@@ -17,7 +17,7 @@ If you are under winzoz, type:
 
 <h2>Usage</h2>
 Just type on a terminal:
-<pre>python3 HibernetV3.x</pre>
+<pre>python3 predator.py.x</pre>
 
 Or double click on the program in winzoz.
 
@@ -25,10 +25,9 @@ Or double click on the program in winzoz.
 <h2>New functionality for multi target attack.</h2>
 Just put your IPs or urls inside "ips.txt"
 
-<h2>Proxy generator</h2>
-If you want more proxies for your attacks, you can use HiberProxy or HiberSOCKS!
+<h2>Auto-Proxy generator</h2>
+All proxies get auto updated every 10 minutes
 
-You can found it here: https://github.com/All3xJ/HiberProxy and here: https://github.com/All3xJ/HiberSOCKS
 
 
 <h1>ENJOY!</h1>
@@ -42,7 +41,3 @@ You can found it here: https://github.com/All3xJ/HiberProxy and here: https://gi
 
 Attack from just 1 lousy vps can be dangerous for a target, so don't aim targets that are not your property.
 
-
-
-<h2>Demonstration video:</h2>
-https://www.youtube.com/watch?v=G84R0qKMpO8
